@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 app.get("/vendor-dashboard", (req, res) => {
     res.render("vendor-dashboard");
 });
-app.get("/add-product", (req, res) => {
+app.get("/product/new", (req, res) => {
     res.render("add-product");
 });
 app.get("/shipper-dashboard", (req, res) => {
@@ -155,13 +155,35 @@ app.post("/add-product", async (req, res) => {
     }
 });
 //GET ALL PRODUCTS
-app.get("/vendor-dashboard", async (req, res) => {
+app.get("/products", async (req, res) => {
     Product.find()
     .then((products) => {
-        res.render('vendor-dashboard', {products: products});
+        res.render("view-products",{products});
     })
     .catch((error) => console.log(error.message));
 });
+// DELETE - Show delete product form
+app.get('/product/:id/delete', (req, res) => {
+    Product.findById(req.params.id)
+      .then(product => {
+        if (!product) {
+          return res.send('Not found any product matching the ID!');
+        }
+        res.render('delete-product', { product });
+      })
+      .catch(error => res.send(error));
+  });
+// DELETE - Delete a product by ID
+app.post('/product/:id/delete', (req, res) => {
+    Product.findByIdAndDelete(req.params.id)
+      .then(product => {
+        if (!product) {
+          return res.send('Not found any product matching the ID!');
+        }
+        res.redirect('/products');
+      })
+      .catch(error => res.send(error));
+  });
 
 //CART
 //CREATE CART
