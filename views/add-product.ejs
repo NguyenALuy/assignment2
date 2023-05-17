@@ -1,0 +1,28 @@
+<%- include("./partials/head") %>
+<main class="form-signin w-100 m-auto text-center">
+    <form action="/add-product" method="post">
+      <img class="mb-4" src="/img/logo.png" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">ADD A NEW PRODUCT HERE</h1>
+  
+      <div class="form-floating">
+        <input type="text" class="form-control" name="name" placeholder="Product Name">
+        <label for="floatingInput">Product Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" name="desc" placeholder="description">
+        <label for="floatingInput">Product Description</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" name="category" placeholder="Product Category">
+        <label for="floatingInput">Category</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" name="price" placeholder="Product Price">
+        <label for="floatingInput">Price</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
+      <button class="w-100 btn btn-lg btn-primary" type="reset">Clear All</button>
+      <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+    </form>
+  </main>
+<%- include("./partials/ending") %>
