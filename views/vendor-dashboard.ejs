@@ -1,7 +1,20 @@
 <%- include("./partials/head") %>
-  <%- include("./partials/navbar") %>
+<%- include("./partials/navbar") %>
+<!-- <%- include("./partials/banner") %> -->
     <main>
-      <button class="w-100 btn btn-lg btn-primary"><a href="/products">View All Products</a></button>
-      <button class="w-100 btn btn-lg btn-primary"><a href="/product/new">Add New Product</a></button>
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <button class="btn py-5 w-100 btn-info btn-lg"><a href="/products">View All Products</a></button>
+          </div>
+          <div class="col-6">
+            <button class="btn py-5 w-100 btn-success btn-lg"><a href="/product/new">Add New Product</a></button>
+          </div>
+        </div>
+      </div>
     </main>
-    <%- include("./partials/ending") %>
+
+<!-- FOOTER -->
+<%- include("partials/footer") %>
+<!-- END -->
+<%- include("./partials/ending") %>
