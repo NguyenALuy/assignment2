@@ -123,13 +123,13 @@ app.post("/login", async (req, res) => {
                 res.render('vendor-dashboard');
             } else if (user.role === "shipper") {
                 Order.find({ hub: user.hub })
-                  .then((orders) => {
-                    res.render('shipper-dashboard', { orders });
-                  })
-                  .catch((error) => console.log(error.message));
-              } else {
+                    .then((orders) => {
+                        res.render('shipper-dashboard', { orders });
+                    })
+                    .catch((error) => console.log(error.message));
+            } else {
                 res.status(400).send('Invalid user role.');
-              }
+            }
         }
 
     } catch (err) {
@@ -179,6 +179,21 @@ app.get("/products", async (req, res) => {
         })
         .catch((error) => console.log(error.message));
 });
+//FILTER
+app.get('/filter', (req, res) => {
+    const minPrice = parseInt(req.query.minPrice);
+    const maxPrice = parseInt(req.query.maxPrice);
+    Product.find({ price: { $gte: minPrice, $lte: maxPrice } })
+      .then((products) => {
+        res.render('home', { products });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.status(500).send('Internal Server Error');
+      });
+  });
+  
+
 // DELETE - Show delete product form
 app.get('/product/:id/delete', (req, res) => {
     Product.findById(req.params.id)
@@ -256,37 +271,37 @@ app.post('/checkout', async (req, res) => {
 // UPDATE - Show update order form
 app.get('/shipper-dashboard/:id/update', (req, res) => {
     Order.findById(req.params.id)
-      .then(order => {
-        if (!order) {
-          return res.send('Not found any order matching the ID!');
-        }
-        res.render('update-order', { order });
-      })
-      .catch(error => res.send(error));
-  });
+        .then(order => {
+            if (!order) {
+                return res.send('Not found any order matching the ID!');
+            }
+            res.render('update-order', { order });
+        })
+        .catch(error => res.send(error));
+});
 // UPDATE - Update an order by ID
 app.post('/shipper-dashboard/:id/update', (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['status', 'hub'];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
-  
+
     if (!isValidOperation) {
-      return res.send({ error: 'Invalid updates!' });
+        return res.send({ error: 'Invalid updates!' });
     }
-  
+
     Order.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
-      })
-      .then(order => {
-        if (!order) {
-          return res.send('Not found any order matching the ID!');
-        }
-        res.send("Updated The Order Successfully");
-      })
-      .catch(error => res.send(error));
-  });
-  
+    })
+        .then(order => {
+            if (!order) {
+                return res.send('Not found any order matching the ID!');
+            }
+            res.send("Updated The Order Successfully");
+        })
+        .catch(error => res.send(error));
+});
+
 
 
 app.listen(port, () => {
