@@ -13,7 +13,18 @@
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <input type="search" class="form-control" id="search-item" name="" placeholder="Search...." onkeyup="search()">
+        <div class="product-list" id="product-list" style="display: none;">
+          <a href="#">
+              <div class="product1">
+                  <img src="/img/logo.png" alt="">
+                  <div class="p-details">
+                      <h2>Nike Air Force 1 '07 LV8 Paisley Swoosh</h2>
+                      <h3>$125</h3>
+                  </div>
+              </div>
+          </a>
+      </div>
       </form>
 
       <div class="dropdown text-end">
