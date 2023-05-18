@@ -19,6 +19,9 @@ mongoose.connect('mongodb+srv://Luy:mypassword@cluster0.tv3wrar.mongodb.net/shop
 app.get("/login", (req, res) => {
     res.render("login");
 });
+app.get("/about", (req, res) => {
+    res.render("about");
+});
 app.get("/", (req, res) => {
     Product.find()
         .then((products) => {
