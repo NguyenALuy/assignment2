@@ -162,6 +162,7 @@ app.post("/add-product", async (req, res) => {
         name: req.body.name,
         desc: req.body.desc,
         price: req.body.price,
+        image: req.body.image,
         category: req.body.category,
     });
     try {
