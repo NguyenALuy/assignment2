@@ -80,3 +80,94 @@ a{
   .about-item:hover hr{
     transition: all 400ms ease-in-out;
   }
+
+  .footer {
+    background-color: whitesmoke;
+    margin: 0;
+  }
+  
+  .footer1 {
+    flex: 1;
+    margin-bottom: 50px;
+    color: blue;
+    padding: 20px;
+  }
+  
+  .socialIcons {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .socialIcons a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 50%;
+  }
+  
+  .socialIcons a i {
+    font-size: 2em;
+    color: blue;
+    opacity: 0.9;
+  }
+  
+  .socialIcons a:hover {
+    background-color: whitesmoke;
+    transition: 0.5s;
+  }
+  
+  .socialIcons a {
+    background-color: white;
+    transition: 0.5s;
+  }
+  
+  .footer2 {
+    margin: 0px;
+  }
+  
+  .footer2 ul {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0px;
+  }
+  
+  .footer2 ul li {
+    margin: 10px;
+    font-size: 1em;
+    text-decoration: none;
+    opacity: 0.6;
+  }
+  
+  .footer2 ul li:hover {
+    opacity: 1;
+  }
+  
+  .footerbottom {
+    text-align: center;
+    padding: 5px;
+    background-color: whitesmoke;
+    margin: 0;
+    font-size: 14px;
+  }
+  .desinger {
+    opacity: 0.7;
+    font-weight: 500;
+    margin: 0 5px;
+  
+  }
+  
+  @media (max-width:700px) {
+    .footer2 ul {
+        flex-direction: column;
+    }
+  
+    .footer2 ul li {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+  
+  }
