@@ -1,33 +1,46 @@
-<%- include("./partials/head")  %>
-<main class="form-signin w-100 m-auto text-center">
-    <form action="/customer-register" method="post">
-      <img class="mb-4" src="/img/logo.png" alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-  
-      <div class="form-floating">
-        <input type="text" class="form-control" name="username" placeholder="name@example.com">
-        <label for="floatingInput">Username</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" name="password" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" name="realname" placeholder="Enter Your Name">
-        <label for="floatingPassword">Real Name</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" name="address" placeholder="Enter Your Address">
-        <label for="floatingPassword">Address</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" name="role" value="customer" readonly>
-      </div>
+<%- include("./partials/head") %>
+  <section class="vh-100" style="background-color: white">
+    <form action="/vendor-register" method="post">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+              <div class="card-body p-5 text-center">
+                <div class="form-outline mb-2">
+                  <img class="mb-4" src="/img/logo.png" alt="" width="72" height="57">
+                  <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="username" placeholder="name@example.com">
+                    <label for="floatingInput">Username</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="realname" placeholder="Enter Your Name">
+                    <label for="floatingPassword">Real Name</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="address" placeholder="Enter Your Address">
+                    <label for="floatingPassword">Address</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="role" value="customer" readonly>
+                  </div>
+                  <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
-      <button class="w-100 btn btn-lg btn-primary"><a href="/login">Already Have Account, Loginr</a></button>
-      <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+                  <hr class="my-4">
+
+                  <button class="w-100 btn btn-lg btn-primary mb-3"><a href="/login">Already Have Account,
+                      Login</a></button>
+                  <p class="mt-5 mb-3 text-body-secondary">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </form>
-  </main>
+  </section>
   <%- include("./partials/ending") %>
