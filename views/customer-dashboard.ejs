@@ -1,65 +1,65 @@
+<!-- HEADER -->
 <%- include('partials/head') %>
-  <!-- HEADER -->
-  <%- include('partials/navbar') %>
+<%- include('partials/navbar') %>
 
-    <!-- BANNER -->
-    <!-- <%- include('partials/banner') %> -->
+<!-- BANNER -->
+<!-- <%- include('partials/banner') %> -->
 
-    <!-- MAIN HOME-->
-    <main>
-      <div class="wrapper">
-        <header>
-          <h2>Price Range</h2>
-          <p>Use slider or enter min and max price</p>
-        </header>
-        <div class="price-input">
-          <div class="field">
-            <span>Min</span>
-            <input type="number" class="input-min" value="2500">
-          </div>
-          <div class="separator">-</div>
-          <div class="field">
-            <span>Max</span>
-            <input type="number" class="input-max" value="7500">
-          </div>
-        </div>
-        <div class="slider">
-          <div class="progress"></div>
-        </div>
-        <div class="range-input">
-          <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-          <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
-        </div>
+<!-- MAIN HOME-->
+<main>
+  <div class="wrapper">
+    <header>
+      <h2>Price Range</h2>
+      <p>Use slider or enter min and max price</p>
+    </header>
+    <div class="price-input">
+      <div class="field">
+        <span>Min</span>
+        <input type="number" class="input-min" value="2500">
       </div>
+      <div class="separator">-</div>
+      <div class="field">
+        <span>Max</span>
+        <input type="number" class="input-max" value="7500">
+      </div>
+    </div>
+    <div class="slider">
+      <div class="progress"></div>
+    </div>
+    <div class="range-input">
+      <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+      <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+    </div>
+  </div>
 
-      <div class="container">
-        <div class="row">
-          <% products.forEach(function(product){ %>
-            <div class="col-sm-3 mb-4 mb-sm-0">
-              <div class="card shadow-sm">
-                <img src="/img/<%= product.image %>" alt="<% product.image %>">
-                <div class="card-body">
-                  <h3 class="card-title">
-                    <%= product.name %>
-                  </h3>
-                  <h4 class="card-text text-danger">
-                    <%= product.price %> AUD
-                  </h4>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="product/<%= product.id %>" type="button" class="btn btn-primary">View</a>
-                      <a href="/order" type="button" class="btn btn-primary">Order</a>
-                    </div>
-                  </div>
+  <div class="container">
+    <div class="row">
+      <% products.forEach(function(product){ %>
+        <div class="col-sm-3 mb-4 mb-sm-0">
+          <div class="card shadow-sm">
+            <img src="/img/<%= product.image %>" alt="<% product.image %>">
+            <div class="card-body">
+              <h3 class="card-title">
+                <%= product.name %>
+              </h3>
+              <h4 class="card-text text-danger">
+                <%= product.price %> AUD
+              </h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="product/<%= product.id %>" type="button" class="btn btn-primary">View</a>
+                  <a href="/order" type="button" class="btn btn-primary">Order</a>
                 </div>
               </div>
             </div>
-            <% }); %>
+          </div>
         </div>
-      </div>
-    </main>
+        <% }); %>
+    </div>
+  </div>
+</main>
 
-    <!-- FOTTER -->
-    <%- include("partials/footer") %>
-      <!-- END -->
-      <%- include('partials/ending') %>
+<!-- FOTTER -->
+<%- include("partials/footer") %>
+<!-- END -->
+<%- include('partials/ending') %>
