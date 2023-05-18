@@ -12,7 +12,7 @@ app.use(express.static('public'));
 // Use the `express.urlencoded` middleware to parse incoming form data
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb+srv://Luy:mypassword@cluster0.tv3wrar.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://Luy:mypassword@cluster0.tv3wrar.mongodb.net/shop?retryWrites=true&w=majority')
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch((error) => console.log(error.message));
 
@@ -20,7 +20,11 @@ app.get("/login", (req, res) => {
     res.render("login");
 });
 app.get("/", (req, res) => {
-    res.render("home");
+    Product.find()
+        .then((products) => {
+            res.render("home", { products });
+        })
+        .catch((error) => console.log(error.message));
 });
 app.get("/vendor-dashboard", (req, res) => {
     res.render("vendor-dashboard");
@@ -107,12 +111,22 @@ app.post("/login", async (req, res) => {
             res.status(400).send("Wrong Password");
         } else {
             if (user.role === "customer") {
-                res.render('home');
+                Product.find()
+                    .then((products) => {
+                        res.render("customer-dashboard", { products });
+                    })
+                    .catch((error) => console.log(error.message));
             } else if (user.role === "vendor") {
-                res.render('vendor-dashboard')
-            } else {
-                res.render('shipper-dashboard');
-            }
+                res.render('vendor-dashboard');
+            } else if (user.role === "shipper") {
+                Order.find({ hub: user.hub })
+                  .then((orders) => {
+                    res.render('shipper-dashboard', { orders });
+                  })
+                  .catch((error) => console.log(error.message));
+              } else {
+                res.status(400).send('Invalid user role.');
+              }
         }
 
     } catch (err) {
@@ -150,108 +164,126 @@ app.post("/add-product", async (req, res) => {
     try {
         await newProduct.save();
         res.redirect("/vendor-dashboard");
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 });
 //GET ALL PRODUCTS
 app.get("/products", async (req, res) => {
     Product.find()
-    .then((products) => {
-        res.render("view-products",{products});
-    })
-    .catch((error) => console.log(error.message));
+        .then((products) => {
+            res.render("view-products", { products });
+        })
+        .catch((error) => console.log(error.message));
 });
 // DELETE - Show delete product form
 app.get('/product/:id/delete', (req, res) => {
     Product.findById(req.params.id)
-      .then(product => {
-        if (!product) {
-          return res.send('Not found any product matching the ID!');
-        }
-        res.render('delete-product', { product });
-      })
-      .catch(error => res.send(error));
-  });
+        .then(product => {
+            if (!product) {
+                return res.send('Not found any product matching the ID!');
+            }
+            res.render('delete-product', { product });
+        })
+        .catch(error => res.send(error));
+});
 // DELETE - Delete a product by ID
 app.post('/product/:id/delete', (req, res) => {
     Product.findByIdAndDelete(req.params.id)
-      .then(product => {
-        if (!product) {
-          return res.send('Not found any product matching the ID!');
-        }
-        res.redirect('/products');
-      })
-      .catch(error => res.send(error));
-  });
-
-//CART
-//CREATE CART
-app.post("/cart", async (req, res) => {
-    const newCart = new Cart(req.body);
-    try {
-        const savedCart = await newCart.save();
-        res.render("/cart", savedCart);
-    } catch (err) {
-        res.send(err.message);
-    }
+        .then(product => {
+            if (!product) {
+                return res.send('Not found any product matching the ID!');
+            }
+            res.redirect('/products');
+        })
+        .catch(error => res.send(error));
 });
-
-//UPADTE CART
-app.post("/", async (req, res) => {
-    try {
-        const updateCart = await Cart.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, { new: true });
-        res.redirect("/cart");
-    } catch (err) {
-        res.send(err.message);
-    }
+//FIND A PRODUCT BY ID IN PRODUCT.EJS
+app.get('/product/:id', (req, res) => {
+    Product.findById(req.params.id)
+        .then((product) => {
+            if (!product) {
+                return res.send("Cannot found that ID!");
+            }
+            res.render('product', { product: product });
+        })
+        .catch((error) => res.send(error));
 });
 
 //ORDER
 //CREATE ORDER, after clicking order in your cart page
-app.post("/order", async (req, res) => {
-    const newOrder = new Order(req.body);
+app.get("/order", async (req, res) => {
+    Product.find()
+        .then((products) => {
+            res.render("order", { products });
+        })
+        .catch((error) => console.log(error.message));
+});
+app.post('/checkout', async (req, res) => {
     try {
-        const savedOrder = await newOrder.save();
-        res.render('/order', savedOrder);
-    } catch (err) {
-        res.send(err.message);
+        const user = await User.findOne({ username: req.body.username });
+        if (!user || user.role !== "customer") {
+            return res.send("No customer existed");
+        }
+
+        const products = await Product.find({ _id: { $in: req.body.products } });
+        const order = new Order({
+            customerName: `${req.body.firstName} ${req.body.lastName}`,
+            products: products,
+            user: user,
+            hub: req.body.hub,
+            address: req.body.address,
+            email: req.body.email,
+        });
+        const savedOrder = await order.save();
+
+        res.render('order-summary', {
+            customerName: `${req.body.firstName} ${req.body.lastName}`,
+            products: products,
+            user: user,
+            hub: req.body.hub,
+        });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Internal Server Error');
     }
 });
 
 //UPADTE, ONLY THE SHIPPER can update the status
-app.post("/", async (req, res) => {
-    try {
-        const updateOrder = await Order.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, { new: true });
-        res.render("/shipper-dashboard", updateOrder);
-    } catch (err) {
-        res.send(err.message);
+// UPDATE - Show update order form
+app.get('/shipper-dashboard/:id/update', (req, res) => {
+    Order.findById(req.params.id)
+      .then(order => {
+        if (!order) {
+          return res.send('Not found any order matching the ID!');
+        }
+        res.render('update-order', { order });
+      })
+      .catch(error => res.send(error));
+  });
+// UPDATE - Update an order by ID
+app.post('/shipper-dashboard/:id/update', (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['status', 'hub'];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+  
+    if (!isValidOperation) {
+      return res.send({ error: 'Invalid updates!' });
     }
-});
-
-//GET CUSTOMER ORDER
-app.get("/find/:id", async (req, res) => {
-    try {
-        const order = await Order.findOne({ userId: req.params.userId });
-        res.render("/shipper-dashboard", order);
-    } catch (err) {
-        res.send(err.message);
-    }
-});
-
-//GET ALL CUSTOMER ORDERS
-app.get("/", async (req, res) => {
-    try {
-        const orders = await Order.find();
-        res.render("/shipper-dashboard", orders);
-    } catch (err) {
-        res.send(err.message);
-    }
-});
+  
+    Order.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      })
+      .then(order => {
+        if (!order) {
+          return res.send('Not found any order matching the ID!');
+        }
+        res.send("Updated The Order Successfully");
+      })
+      .catch(error => res.send(error));
+  });
+  
 
 
 app.listen(port, () => {

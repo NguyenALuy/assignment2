@@ -2,25 +2,23 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
     {
-        products: [
-            {
-                productID:{
-                    type:String,
-                },
-                quantity:{
-                    type:Number,
-                    default: 1,
-                }
-            }
-        ],
-        amount:{
-            type:Number,
+        customerName:{
+            type:String,
         },
+        user:{},
+        email:{
+            type:String,
+        },
+        hub:{
+            type:String,
+        },
+        products: [],
         address: {
             type: Object,
         },
         status: {
             type: String,
+            enum: ["active","canceled","completed"],
             default: "active",
         }, 
     }, { timestamps: true }

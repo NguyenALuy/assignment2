@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Update Product</title>
+</head>
+
+<body>
+  <h1>Update Order</h1>
+
+  <form action="/shipper-dashboard/<%= order._id %>/update" method="POST">
+    <div>
+      <label for="status">Status:</label>
+      <select name="status" id="status">
+        <option value="active" <%=order.status==='active' ? 'selected' : '' %>>Active</option>
+        <option value="completed" <%=order.status==='completed' ? 'selected' : '' %>>Completed</option>
+        <option value="canceled" <%=order.status==='canceled' ? 'selected' : '' %>>Canceled</option>
+      </select>
+    </div>
+    <div>
+      <label for="hub">Hub:</label>
+      <select name="hub" id="hub">
+        <option value="Hochiminh" <%=order.status==='Hochiminh' ? 'selected' : '' %>>Hochiminh</option>
+        <option value="Hanoi" <%=order.status==='Hanoi' ? 'selected' : '' %>>Hanoi</option>
+        <option value="Danang" <%=order.status==='Danang' ? 'selected' : '' %>>Danang</option>
+      </select>
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</body>
+
+</html>
