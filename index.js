@@ -222,7 +222,8 @@ app.post("/add-product", async (req, res) => {
     });
     try {
         await newProduct.save();
-        res.send("Add A New product Successfully");
+
+        res.render("add-product");
     } catch (err) {
         console.log(err);
     }
