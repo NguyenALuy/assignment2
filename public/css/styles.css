@@ -199,5 +199,14 @@ a{
   
   }
   .footer-background{
+    position: flex;
+    bottom: 0; 
     background-color: #88c8bc;
+    width: 100%;
+  }
+  .view-bt{
+    border-radius: 30px;
+  }
+  .add-bt{
+    border-radius: 30px;
   }
