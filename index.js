@@ -50,6 +50,7 @@ app.post("/customer-register", async (req, res) => {
         realname: req.body.realname,
         address: req.body.address,
         role: req.body.role,
+        image: req.body.image,
     });
 
     try {
@@ -70,6 +71,7 @@ app.post("/vendor-register", async (req, res) => {
         realname: req.body.realname,
         address: req.body.address,
         role: req.body.role,
+        image: req.body.image,
     });
 
     try {
@@ -89,6 +91,7 @@ app.post("/shipper-register", async (req, res) => {
         password: passwordHash.generate(req.body.password),
         hub: req.body.hub,
         role: req.body.role,
+        image: req.body.image,
     });
 
     try {
@@ -116,15 +119,15 @@ app.post("/login", async (req, res) => {
             if (user.role === "customer") {
                 Product.find()
                     .then((products) => {
-                        res.render("customer-dashboard", { products });
+                        res.render("customer-dashboard", { products, user});
                     })
                     .catch((error) => console.log(error.message));
             } else if (user.role === "vendor") {
-                res.render('vendor-dashboard');
+                res.render('vendor-dashboard', {user});
             } else if (user.role === "shipper") {
                 Order.find({ hub: user.hub })
                     .then((orders) => {
-                        res.render('shipper-dashboard', { orders });
+                        res.render('shipper-dashboard', { orders, user });
                     })
                     .catch((error) => console.log(error.message));
             } else {
@@ -139,20 +142,60 @@ app.post("/login", async (req, res) => {
 
 //USER ACTIONS
 //UPADTE INFO
-app.post("/my-account/update", async (req, res) => {
-    if (req.body.password) {
-        req.body.password = passwordHash.generate(req.body.password);
+app.get("/my-account/:id", (req, res)=>{
+    const userId = req.params.id;
+
+    User.findById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send("User not found");
+        }
+  
+        res.render("my-account", { user : user});
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error");
+      });
+});
+app.get('/my-account/:id/update', (req, res) => {
+    const userId = req.params.id;
+
+    User.findById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send("User not found");
+        }
+  
+        res.render("update-profile", {user});
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error");
+      });
+});
+app.post('/my-account/:id/update', (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['image']; // Specify the allowed fields as an array
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+
+    if (!isValidOperation) {
+        return res.send({ error: 'Invalid updates!' });
     }
 
-    try {
-        const updateUser = await User.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, { new: true });
-        res.redirect("/my-account");
-    } catch (err) {
-        res.send(err.message);
-    }
+    User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+    })
+        .then(user => {
+            if (!user) {
+                return res.send('User not found!');
+            }
+            res.send("Updated the user successfully");
+        })
+        .catch(error => res.send(error));
 });
+
 
 
 //PRODUCT VENDOR
@@ -174,7 +217,7 @@ app.post("/add-product", async (req, res) => {
 });
 //GET ALL PRODUCTS
 app.get("/products", async (req, res) => {
-    Product.find()
+   await Product.find()
         .then((products) => {
             res.render("view-products", { products });
         })
@@ -232,7 +275,7 @@ app.get('/product/:id', (req, res) => {
 //ORDER
 //CREATE ORDER, after clicking order in your cart page
 app.get("/order", async (req, res) => {
-    Product.find()
+    await Product.find()
         .then((products) => {
             res.render("order", { products });
         })

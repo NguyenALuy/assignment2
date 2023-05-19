@@ -1,0 +1,23 @@
+<%- include('partials/head') %>
+<!-- HEADER -->
+<%- include('partials/navbar') %>
+<form action="/my-account/<%= user._id %>/update" method="post">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="/img/<%= user.image %>" alt="<%= user.image %>"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                <h5 class="my-3"><%= user.username %></h5>
+                <div class="form-floating">
+                    <input type="file" class="form-control" name="image" placeholder="Image Upload">
+                    <label for="floatingInput">New Avatar Upload</label>
+                  </div>
+                <div class="d-flex justify-content-center mb-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<%- include('partials/ending') %>
