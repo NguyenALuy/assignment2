@@ -11,7 +11,7 @@ app.use(express.static('public'));
 // Use the `express.urlencoded` middleware to parse incoming form data
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb+srv://Luy:mypassword@cluster0.tv3wrar.mongodb.net/shop?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://khanhtrinh03:khanhtrinh03@cluster0.qci2ae7.mongodb.net/test?retryWrites=true&w=majority')
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch((error) => console.log(error.message));
 
