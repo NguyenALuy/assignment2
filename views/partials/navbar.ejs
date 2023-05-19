@@ -9,8 +9,8 @@
         <li><a href="/" class="nav-link px-2 link-secondary">
           <img src="/img/logo.png" alt="logo.png" width="100" height="100" class="rounded-circle">
         </a></li>
-        <li><a href="/about" class="nav-link px-2 link-body-emphasis fw-bold">About us</a></li>
-        <li><a href="#" class="nav-link px-2 link-body-emphasis fw-bold">Profile</a></li>
+        <li><a href="/about/<%= user._id %>" class="nav-link px-2 link-body-emphasis fw-bold">About us</a></li>
+        <li><a href="/my-account/<%= user._id %>" class="nav-link px-2 link-body-emphasis fw-bold">Profile</a></li>
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

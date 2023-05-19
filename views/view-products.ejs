@@ -1,40 +1,31 @@
 <!-- HEADER -->
 <%- include('partials/head') %>
-  <%- include('partials/navbar') %>
-
-    <head>
-      <title>Read Products</title>
-    </head>
-
-    <body>
-      <h1>Products</h1>
-      <table>
+  <%- include('partials/banner') %>
+  <div class="table-responsive">
+    <h1>All Products</h1>
+    <table class="table table-striped">
+      <thead>
         <tr>
           <th>Name</th>
           <th>Price</th>
           <th>Description</th>
+          <th>Category</th>
           <th>Delete</th>
         </tr>
+      </thead>
+      <tbody>
         <% products.forEach(function(product) { %>
-          <tr>
-            <td>
-              <%= product.name %>
-            </td>
-            <td>
-              <%= product.price %>
-            </td>
-            <td>
-              <%= product.desc %>
-            </td>
-            <td>
-              <%= product.category %>
-            </td>
-            <td><a class="link-danger" href="/product/<%= product.id %>/delete">Click here</a></td>
-          </tr>
-          <% }); %>
-      </table>
-    </body>
-    <!-- FOOTER -->
-    <%- include("./partials/footer") %>
-      <!-- END -->
-      <%- include('partials/ending') %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><%= product.desc %></td>
+          <td><%= product.category %></td>
+          <td><a class="text-danger" href="/product/<%= product.id %>/delete">Delete</a></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  
+    <!-- END -->
+    <%- include('partials/ending') %>

@@ -18,8 +18,21 @@ mongoose.connect('mongodb+srv://Luy:mypassword@cluster0.tv3wrar.mongodb.net/shop
 app.get("/login", (req, res) => {
     res.render("login");
 });
-app.get("/about", (req, res) => {
-    res.render("about");
+app.get("/about/:id", (req, res) => {
+    const userId = req.params.id;
+
+    User.findById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send("User not found");
+        }
+  
+        res.render("about", { user });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error");
+      });
 });
 app.get("/", (req, res) => {
     Product.find()
@@ -54,7 +67,7 @@ app.post("/customer-register", async (req, res) => {
 
     try {
         const savedUser = await newUser.save();
-        res.redirect("/");
+        res.redirect("/login");
     } catch (err) {
         res.redirect("/customer-register");
     }
@@ -75,7 +88,7 @@ app.post("/vendor-register", async (req, res) => {
 
     try {
         const savedUser = await newUser.save();
-        res.redirect("/");
+        res.redirect("/login");
     } catch (err) {
         res.redirect("/vendor-register");
     }
@@ -95,7 +108,7 @@ app.post("/shipper-register", async (req, res) => {
 
     try {
         const savedUser = await newUser.save();
-        res.redirect("/");
+        res.redirect("/login");
     } catch (err) {
         res.redirect("/shipper-register");
     }
@@ -209,7 +222,7 @@ app.post("/add-product", async (req, res) => {
     });
     try {
         await newProduct.save();
-        res.redirect("/vendor-dashboard");
+        res.send("Add A New product Successfully");
     } catch (err) {
         console.log(err);
     }

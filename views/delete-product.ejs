@@ -1,16 +1,23 @@
 <!-- HEADER -->
 <%- include('partials/head') %>
-  <%- include('partials/navbar') %>
+  <%- include('partials/banner') %>
 
-    <body>
-      <h1>Delete Product</h1>
-      <form action="/product/<%= product._id %>/delete" method="POST">
-        <p>Are you sure you want to delete the product "<%= product.name %>"?</p>
-        <input type="submit" value="Delete">
-      </form>
-    </body>
-
-    <!-- FOOTER -->
-    <%- include("./partials/footer") %>
-      <!-- END -->
-      <%- include('partials/ending') %>
+    <div class="m-4">
+      <h1 class="text-center">Are You Sure to DELETE this product?</h1>
+      <div class="card w-50 m-auto mt-4">
+        <form action="/product/<%= product._id %>/delete" method="POST" class="m-4 d-block d-md-flex justify-content-center">
+          <img src="/img/<%= product.image %>" class="card-img-top w-50 align-items-center" alt="/img/<%= product.image %>">
+        <div class="card-body align-items-center">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-text">Product ID: <%= product._id %></p>
+          <p class="card-text">Product price: <%= product.price %></p>
+          <p class="card-text">Description: <%= product.desc %></p>
+          <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+        </div>
+        </form>
+      </div>
+      
+      
+    </div>
+    <!-- END -->
+    <%- include('partials/ending') %>

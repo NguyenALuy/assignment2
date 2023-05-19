@@ -6,8 +6,8 @@ a{
     color: white;
 }
 /* CAROUSEL */
-.carousel-inner img{
-  width: 470px;
+.carousel-inner .carousel-item img{
+  height: 470px;
 }
 /* FILTER */
 .price-input .field{
