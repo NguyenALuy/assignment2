@@ -4,7 +4,6 @@ const port = 3000;
 const mongoose = require("mongoose");
 const User = require('./models/User');
 const Product = require("./models/Product");
-const Cart = require("./models/Cart");
 const Order = require("./models/Order");
 const passwordHash = require("password-hash");
 app.set('view engine', 'ejs');

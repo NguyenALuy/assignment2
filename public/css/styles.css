@@ -5,7 +5,19 @@ a{
     text-decoration: none;
     color: white;
 }
-
+/* CAROUSEL */
+.carousel-inner img{
+  width: 470px;
+}
+/* FILTER */
+.price-input .field{
+  width: 100%;
+}
+.btn-filter{
+  font-size: 14px;
+  padding: 4px 5px;
+  width: 10%;
+}
 .about-1{
     margin: 30px;
     padding:5px;
