@@ -1,22 +1,37 @@
-<%- include('partials/head') %>
 <!-- HEADER -->
+<%- include('partials/head') %>
 <%- include('partials/navbar') %>
+
+<!-- BREADCRUMB -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mx-3">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Product</li>
+  </ol>
+</nav>
 
 
 <main>
   <div class="container col-xxl-8 px-4 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="row flex-lg align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
-        <img src="/img/logo.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" loading="lazy">
+        <img src="/img/<%= product.image %>" alt="<% product.image %>">
       </div>
       <div class="col-lg-6">
         <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><%= product.name %></h1>
-        <h3 class="text-danger"><%= product.price %> AUD</h3>
+        <hr>
         <p><%= product.desc %></p>
+        <br>
+        <h3 class="text-danger"><%= product.price %> AUD</h3>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <a href="/order" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Order!</a>
+          <a href="/order" type="button" class="btn btn-warning btn-lg px-4 me-md-2">Order!</a>
         </div>
       </div>
     </div>
   </div>
 </main>
+
+<!-- FOOTER -->
+<%- include("./partials/footer") %>
+<!-- END -->
+<%- include('partials/ending') %>
