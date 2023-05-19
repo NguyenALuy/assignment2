@@ -199,11 +199,10 @@ a{
   
   }
   .footer-background{
-    position: fixed;
+    position: flex;
     bottom: 0; 
     background-color: #88c8bc;
     width: 100%;
-    bottom: 0;
   }
   .view-bt{
     border-radius: 30px;
