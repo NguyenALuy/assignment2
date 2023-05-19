@@ -50,7 +50,9 @@ app.get("/product/new", (req, res) => {
 app.get("/shipper-dashboard", (req, res) => {
     res.render("shipper-dashboard");
 });
-
+app.get("/privacy-policy", (req, res)=>{
+    res.render("privacy-policy");
+})
 //CUSTOMER REGISTER PAGE
 app.get("/customer-register", (req, res) => {
     res.render("customer-register");

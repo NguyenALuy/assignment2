@@ -61,7 +61,7 @@
         <div class="container">
           <div class="row">
             <% products.forEach(function(product){ %>
-              <div class="col-sm-3 mb-4 mb-sm-0 py-3">
+              <div class="col-12 col-sm-6 col-md-3 mb-4 mb-sm-0 py-3">
                 <div class="card h-100 shadow-sm">
                   <img src="/img/<%= product.image %>" alt="<% product.image %>">
                   <div class="card-body">
@@ -100,7 +100,6 @@
             <div class="col-6 col-md-2 mb-3">
               <h5>Terms of Use</h5>
               <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Terms</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Copyright</a></li>
               </ul>
             </div>
@@ -108,7 +107,7 @@
             <div class="col-6 col-md-2 mb-3">
               <h5>Privacy</h5>
               <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Privacy Policy</a></li>
+                <li class="nav-item mb-2"><a href="/privacy-policy" class="nav-link p-0 text-body-secondary">Privacy Policy</a></li>
             </ul>
             </div>
       
