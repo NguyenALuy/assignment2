@@ -6,7 +6,7 @@ a{
     color: white;
 }
 /* CAROUSEL */
-.carousel-inner .carousel-item img{
+.carousel-inner img{
   height: 470px;
 }
 /* FILTER */
