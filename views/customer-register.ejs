@@ -1,6 +1,6 @@
 <%- include("./partials/head") %>
   <section class="vh-100" style="background-color: white">
-    <form action="/vendor-register" method="post">
+    <form action="/customer-register" method="post">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -15,7 +15,8 @@
                     <label for="floatingInput">Username</label>
                   </div>
                   <div class="form-floating">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Password"
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,20}$" required>
                     <label for="floatingPassword">Password</label>
                   </div>
                   <div class="form-floating">
