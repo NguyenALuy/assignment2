@@ -203,7 +203,7 @@ app.post('/my-account/:id/update', (req, res) => {
             if (!user) {
                 return res.send('User not found!');
             }
-            res.send("Updated the user successfully");
+            res.render("my-account", {user});
         })
         .catch(error => res.send(error));
 });
