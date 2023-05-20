@@ -1,4 +1,5 @@
 How to run:
+- npm install (to install all packages required for the project)
 - Ctrl + shift + P and search MongoDB: Connect with connection string. Paste: mongodb+srv://Luy:mypassword@cluster0.tv3wrar.mongodb.net/shop?retryWrites=true&w=majority'
 - Open terminal and type node index.js 
 - Open web by localhost:3000
