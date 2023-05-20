@@ -1,3 +1,10 @@
+// RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023A
+// Assessment: Assignment 2
+// Author: Nguyen A Luy, Le Trung Kien, Trinh Xuan Khanh, Cao Le Hoang Minh, Le Khanh Toan
+// ID: Your student ids (e.g. 1234567)
+// Acknowledgement: Acknowledge the resources that you use here.
 const express = require('express');
 const app = express();
 const port = 3000;
