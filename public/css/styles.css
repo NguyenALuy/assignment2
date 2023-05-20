@@ -20,6 +20,25 @@ a{
     text-decoration: none;
     color: white;
 }
+
+.btn-view{
+  background-color: #98EECC;
+}
+.btn-view:hover{
+  background-color: #6fe4b5;
+}
+.btn-order{
+  background-color: #FF7B54;
+}
+.btn-order:hover{
+  background-color: #f76a3f;
+}
+.card .card-body .card-title{
+  font-size: 1.5rem;
+}
+.card img{
+  height: 60%;
+}
 /* CAROUSEL */
 .carousel-inner img{
   height: 470px;

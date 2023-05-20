@@ -71,10 +71,10 @@
                     <h4 class="card-text text-danger">
                       <%= product.price %> USD
                     </h4>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a href="/login" type="button" class="btn btn-success">View</a>
-                        <a href="/login" type="button" class="btn btn-warning">Order</a>
+                    <div class="d-flex justify-content-around align-items-center">
+                      <div>
+                        <a href="/login" type="button" class="btn btn-view">View</a>
+                        <a href="/login" type="button" class="btn btn-order">Order</a>
                       </div>
                     </div>
                   </div>
@@ -93,7 +93,6 @@
               <h5>About US</h5>
               <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About Us</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact Us</a></li>
               </ul>
             </div>
       
@@ -105,20 +104,20 @@
             </div>
       
             <div class="col-md-5 offset-md-1 mb-3">
-              <form>
+              <form action="https://formsubmit.co/s3891919@rmit.edu.vn" method="POST">
                 <h5>Subscribe to our newsletter</h5>
                 <p>Monthly digest of what's new and exciting from us.</p>
                 <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                   <label for="newsletter1" class="visually-hidden">Email address</label>
-                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                  <button class="btn btn-primary" type="button">Subscribe</button>
+                  <input id="newsletter1" name="Email" type="email" class="form-control" placeholder="Email address">
+                  <button class="btn btn-primary" type="submit">Subscribe</button>
                 </div>
               </form>
             </div>
           </div>
       
           <div class="d-flex flex-column flex-sm-row justify-content-center pt-4 mt-4 border-top">
-            <p>© 2023 Company, Inc. All rights reserved.</p>
+            <p>© 2023 Step Up, Inc. All rights reserved.</p>
           </div>
         </footer>
       </div>        <!-- END -->
